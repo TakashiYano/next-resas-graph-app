@@ -34,4 +34,5 @@ const prefectureLayout = css({
   display: "grid",
   gap: "8px",
   gridTemplateColumns: "repeat(auto-fit, minmax(80px, 136px))",
+  padding: "1rem",
 });

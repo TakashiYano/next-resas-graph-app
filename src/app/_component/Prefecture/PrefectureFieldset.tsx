@@ -6,7 +6,7 @@ import { type Prefecture } from "@/lib/prefecture/type";
 import { css } from "../../../../styled-system/css";
 
 type Props = {
-  prefectures: Prefecture[];
+  prefectures?: Prefecture[];
 };
 
 export const PrefectureFieldset: FC<Props> = ({ prefectures }) => {
@@ -14,7 +14,7 @@ export const PrefectureFieldset: FC<Props> = ({ prefectures }) => {
     <fieldset className={prefectureFieldset}>
       <legend className={prefectureLegend}>都道府県</legend>
       <div className={prefectureLayout}>
-        {prefectures.map((prefecture) => {
+        {prefectures?.map((prefecture) => {
           return <CheckBox key={prefecture.prefCode} label={prefecture.prefName} />;
         })}
       </div>

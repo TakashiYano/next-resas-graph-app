@@ -1,5 +1,10 @@
 import { Main } from "@/app/_component/Main";
+import { getPrefectures } from "@/lib/resas/prefecture";
 
-export default function Home() {
-  return <Main />;
-}
+const Home = async () => {
+  const prefectures = await getPrefectures();
+
+  return <Main prefectures={prefectures} />;
+};
+
+export default Home;

@@ -10,5 +10,5 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.words": ["ianvs", "outdir", "pandacss", "resas"]
+  "cSpell.words": ["highcharts", "ianvs", "outdir", "pandacss", "resas"]
 }

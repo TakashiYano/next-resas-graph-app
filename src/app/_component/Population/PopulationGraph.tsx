@@ -5,6 +5,7 @@ import { type FC } from "react";
 import Highcharts, { type Options, type SeriesOptionsType } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsMore from "highcharts/highcharts-more";
+import NoDataToDisplay from "highcharts/modules/no-data-to-display";
 
 type Props = {
   data: SeriesOptionsType[];
@@ -13,19 +14,21 @@ type Props = {
 export const PopulationGraph: FC<Props> = ({ data }) => {
   if (typeof Highcharts === "object") {
     HighchartsMore(Highcharts);
+    NoDataToDisplay(Highcharts);
   }
   const options: Options = {
+    lang: {
+      noData: "表示するデータがありません",
+    },
     legend: {
       align: "right",
       layout: "vertical",
       verticalAlign: "middle",
     },
-
-    plotOptions: {
-      series: {
-        label: {
-          connectorAllowed: false,
-        },
+    noData: {
+      style: {
+        fontSize: "16px",
+        fontWeight: "bold",
       },
     },
 

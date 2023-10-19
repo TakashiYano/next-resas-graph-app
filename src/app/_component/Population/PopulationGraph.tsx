@@ -2,21 +2,19 @@
 
 import { type FC } from "react";
 
-import Highcharts from "highcharts";
+import Highcharts, { type Options, type SeriesOptionsType } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsMore from "highcharts/highcharts-more";
-import HighchartsExporting from "highcharts/modules/exporting";
 
 type Props = {
-  data: Highcharts.SeriesOptionsType[];
+  data: SeriesOptionsType[];
 };
 
 export const PopulationGraph: FC<Props> = ({ data }) => {
   if (typeof Highcharts === "object") {
-    HighchartsExporting(Highcharts);
     HighchartsMore(Highcharts);
   }
-  const options: Highcharts.Options = {
+  const options: Options = {
     legend: {
       align: "right",
       layout: "vertical",
@@ -28,8 +26,6 @@ export const PopulationGraph: FC<Props> = ({ data }) => {
         label: {
           connectorAllowed: false,
         },
-        pointInterval: 5,
-        pointStart: 1960,
       },
     },
 
@@ -51,14 +47,14 @@ export const PopulationGraph: FC<Props> = ({ data }) => {
     },
 
     series: data,
+    subtitle: {
+      text: "選択した都道府県のデータが表示されます。",
+    },
     title: {
       text: "人口遷移グラフ",
     },
 
     xAxis: {
-      accessibility: {
-        rangeDescription: "Range: 1980 to 2020",
-      },
       title: {
         align: "high",
         text: "年度",

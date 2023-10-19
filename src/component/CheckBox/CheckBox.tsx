@@ -1,15 +1,16 @@
-import { type FC } from "react";
+import { type ComponentProps, type FC } from "react";
 
 import { css } from "../../../styled-system/css";
 
 type Props = {
   label: string;
+  onChange: ComponentProps<"input">["onChange"];
 };
 
-export const CheckBox: FC<Props> = ({ label }) => {
+export const CheckBox: FC<Props> = ({ label, onChange }) => {
   return (
     <label className={checkBoxControl}>
-      <input className={checkBox} type="checkbox" />
+      <input className={checkBox} type="checkbox" onChange={onChange} />
       <span className={labelText}>{label}</span>
     </label>
   );

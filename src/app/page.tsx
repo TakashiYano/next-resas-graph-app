@@ -1,5 +1,5 @@
-import { css } from "../../styled-system/css";
+import { CheckBox } from "@/component/CheckBox";
 
 export default function Home() {
-  return <div className={css({ fontSize: "2xl", fontWeight: "bold" })}>Hello</div>;
+  return <CheckBox label="Hello" />;
 }

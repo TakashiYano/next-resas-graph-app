@@ -4,14 +4,14 @@ import { useCallback, useReducer, useState, type ChangeEvent } from "react";
 
 import { type SeriesOptionsType } from "highcharts";
 
-import { type PopulationCategories } from "@/lib/population/type";
+import { type PopulationCategory } from "@/lib/population/type";
 import { getPopulations } from "@/lib/resas/population";
 
 const ADD_POPULATION = "ADD_POPULATION";
 const REMOVE_POPULATION = "REMOVE_POPULATION";
 
 type Action = {
-  payload?: PopulationCategories;
+  payload?: PopulationCategory;
   prefName: string;
   type: string;
 };
@@ -21,11 +21,8 @@ const initialState: SeriesOptionsType[] = [];
 const reducer = (state: SeriesOptionsType[], action: Action) => {
   switch (action.type) {
     case ADD_POPULATION:
-      const totalPopulation = action.payload?.result.data.find((category) => {
-        return category.label === "総人口";
-      });
       const population: SeriesOptionsType = {
-        data: totalPopulation?.data.map((d) => {
+        data: action.payload?.data.map((d) => {
           return [d.year, d.value];
         }),
         name: action.prefName,
@@ -52,7 +49,17 @@ export const usePopulation = () => {
         setIsLoading(true);
         try {
           const data = await getPopulations({ cityCode: "-", prefCode });
-          dispatch({ payload: data, prefName, type: ADD_POPULATION });
+          const totalPopulation = data.result.data.find((category) => {
+            return category.label === "総人口";
+          });
+          if (totalPopulation === undefined) {
+            throw Error("総人口推移データが存在しません。");
+          }
+          dispatch({
+            payload: totalPopulation,
+            prefName,
+            type: ADD_POPULATION,
+          });
           setIsLoading(false);
         } catch (error) {
           setErrorMessage(`${prefName}の総人口推移データの取得に失敗しました。`);

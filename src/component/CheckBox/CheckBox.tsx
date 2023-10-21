@@ -4,8 +4,7 @@ import { css } from "../../../styled-system/css";
 
 type Props = {
   label: string;
-  onChange: ComponentProps<"input">["onChange"];
-};
+} & ComponentProps<"input">;
 
 export const CheckBox: FC<Props> = ({ label, onChange }) => {
   return (

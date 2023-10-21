@@ -9,7 +9,7 @@ type Props = {
 export const CheckBox: FC<Props> = ({ label, onChange }) => {
   return (
     <label className={checkBoxControl}>
-      <input className={checkBox} type="checkbox" onChange={onChange} />
+      <input className={checkBox} type="checkbox" onChange={onChange} name={label} />
       <span className={labelText}>{label}</span>
     </label>
   );

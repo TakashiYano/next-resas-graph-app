@@ -5,6 +5,7 @@ import { type FC } from "react";
 import Highcharts, { type Options, type SeriesOptionsType } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsMore from "highcharts/highcharts-more";
+import Accessibility from "highcharts/modules/accessibility";
 import NoDataToDisplay from "highcharts/modules/no-data-to-display";
 
 type PopulationProps = {
@@ -15,6 +16,7 @@ export const PopulationGraph: FC<PopulationProps> = ({ populations }) => {
   if (typeof Highcharts === "object") {
     HighchartsMore(Highcharts);
     NoDataToDisplay(Highcharts);
+    Accessibility(Highcharts);
   }
   const options: Options = {
     lang: {

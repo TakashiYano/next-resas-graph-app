@@ -7,11 +7,11 @@ import HighchartsReact from "highcharts-react-official";
 import HighchartsMore from "highcharts/highcharts-more";
 import NoDataToDisplay from "highcharts/modules/no-data-to-display";
 
-type Props = {
-  data: SeriesOptionsType[];
+type PopulationProps = {
+  populations: SeriesOptionsType[];
 };
 
-export const PopulationGraph: FC<Props> = ({ data }) => {
+export const PopulationGraph: FC<PopulationProps> = ({ populations }) => {
   if (typeof Highcharts === "object") {
     HighchartsMore(Highcharts);
     NoDataToDisplay(Highcharts);
@@ -27,11 +27,10 @@ export const PopulationGraph: FC<Props> = ({ data }) => {
     },
     noData: {
       style: {
-        fontSize: "16px",
+        fontSize: "1rem",
         fontWeight: "bold",
       },
     },
-
     responsive: {
       rules: [
         {
@@ -48,24 +47,19 @@ export const PopulationGraph: FC<Props> = ({ data }) => {
         },
       ],
     },
-
-    series: data,
+    series: populations,
     subtitle: {
-      text: "選択した都道府県のデータが表示されます。",
+      text: "選択した都道府県のデータを表示",
     },
     title: {
-      text: "人口遷移グラフ",
+      text: "総人口推移グラフ",
     },
-
     xAxis: {
       title: {
         align: "high",
         text: "年度",
-        x: 30,
-        y: -20,
       },
     },
-
     yAxis: {
       title: {
         align: "high",

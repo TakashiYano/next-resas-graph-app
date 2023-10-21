@@ -6,7 +6,7 @@ export const Header: FC = () => {
   return (
     <header className={header}>
       <div className={container}>
-        <h1 className={title}>RESAS Graph App</h1>
+        <h1 className={title}>都道府県別の総人口推移グラフ</h1>
       </div>
     </header>
   );
@@ -14,7 +14,7 @@ export const Header: FC = () => {
 
 const header = css({
   backgroundColor: "#b7b4b4",
-  padding: "16px 0",
+  padding: "1rem 0",
   width: "100%",
 });
 
@@ -23,7 +23,7 @@ const container = css({
   display: "flex",
   justifyContent: "center",
   margin: "0 auto",
-  maxWidth: "1280px",
+  maxWidth: "80rem",
   padding: "0 4%",
 });
 

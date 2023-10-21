@@ -5,14 +5,15 @@ import { type Prefecture } from "@/lib/prefecture/type";
 
 import { css } from "../../../../styled-system/css";
 
-type Props = {
+type PrefectureProps = {
+  disabled: boolean;
   handleCheck: (prefCode: number, prefName: string) => (e: ChangeEvent<HTMLInputElement>) => void;
   prefectures?: Prefecture[];
 };
 
-export const PrefectureFieldset: FC<Props> = ({ handleCheck, prefectures }) => {
+export const PrefectureFieldset: FC<PrefectureProps> = ({ disabled, handleCheck, prefectures }) => {
   return (
-    <fieldset className={prefectureFieldset}>
+    <fieldset className={prefectureFieldset} disabled={disabled}>
       <legend className={prefectureLegend}>都道府県</legend>
       <div className={prefectureLayout}>
         {prefectures?.map((prefecture) => {
@@ -34,12 +35,15 @@ const prefectureFieldset = css({
 });
 
 const prefectureLegend = css({
-  fontSize: "32px",
+  fontSize: "1.25rem",
+  fontWeight: "bold",
+  textAlign: "left",
 });
 
 const prefectureLayout = css({
   display: "grid",
-  gap: "8px",
-  gridTemplateColumns: "repeat(auto-fit, minmax(80px, 136px))",
+  gap: "1rem",
+  gridTemplateColumns: "repeat(auto-fit, 90px)",
   padding: "1rem",
+  placeContent: "center",
 });

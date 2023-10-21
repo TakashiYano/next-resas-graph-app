@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useReducer, type ChangeEvent } from "react";
+import { useCallback, useReducer, useState, type ChangeEvent } from "react";
 
 import { type SeriesOptionsType } from "highcharts";
 
@@ -43,18 +43,37 @@ const reducer = (state: SeriesOptionsType[], action: Action) => {
 
 export const usePopulation = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handlePrefectureCheck = useCallback((prefCode: number, prefName: string) => {
-    return (e: ChangeEvent<HTMLInputElement>) => {
+    return async (e: ChangeEvent<HTMLInputElement>) => {
       if (e.target.checked) {
-        getPopulations({ cityCode: "-", prefCode }).then((data) => {
-          return dispatch({ payload: data, prefName, type: ADD_POPULATION });
-        });
+        setIsLoading(true);
+        try {
+          const data = await getPopulations({ cityCode: "-", prefCode });
+          dispatch({ payload: data, prefName, type: ADD_POPULATION });
+          setIsLoading(false);
+        } catch (error) {
+          setErrorMessage(`${prefName}の総人口推移データの取得に失敗しました。`);
+          console.error(error);
+        }
+        setIsLoading(false);
       } else {
         dispatch({ prefName, type: REMOVE_POPULATION });
       }
     };
   }, []);
 
-  return { handlePrefectureCheck, populations: state };
+  const handleResetError = useCallback(() => {
+    setErrorMessage("");
+  }, []);
+
+  return {
+    handlePrefectureCheck,
+    handleResetError,
+    isChecking: isLoading,
+    populationErrMsg: errorMessage,
+    populations: state,
+  };
 };

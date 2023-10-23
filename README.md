@@ -1,5 +1,9 @@
 # RESAS API App
 
+- [Deployed Preview here](https://next-resas-graph-app.vercel.app/)
+
+- [Work Report here](./WORK_REPORT.md)
+
 ## 構成
 
 - TypeScript
